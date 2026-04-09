@@ -1,0 +1,24 @@
+{
+  "name": "AI Email Responder",
+  "description": "Drafts intelligent email replies using Claude AI",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "type": "gmail-trigger",
+      "name": "New Email Received",
+      "filter": "unread, inbox only"
+    },
+    {
+      "type": "claude-ai",
+      "name": "Draft Reply",
+      "prompt": "You are a professional assistant. Draft a helpful reply to: {{email_body}}. Keep it concise and professional."
+    },
+    {
+      "type": "gmail",
+      "name": "Save as Draft",
+      "action": "create_draft"
+    }
+  ],
+  "use_case": "Automated email management for entrepreneurs",
+  "author": "developerstartweb-stack"
+}
