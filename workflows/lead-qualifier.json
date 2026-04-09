@@ -1,0 +1,33 @@
+{
+  "name": "Lead Qualifier - Claude AI",
+  "description": "Automatically qualifies leads using Claude AI based on form submissions",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "type": "webhook",
+      "name": "Lead Form Trigger",
+      "description": "Receives lead data from contact forms"
+    },
+    {
+      "type": "claude-ai",
+      "name": "Qualify Lead",
+      "prompt": "Analyze this lead and score 1-10: {{lead_data}}. Return JSON with score, reason, and next_action."
+    },
+    {
+      "type": "conditional",
+      "name": "Route by Score",
+      "conditions": {
+        "hot": "score >= 7",
+        "warm": "score >= 4",
+        "cold": "score < 4"
+      }
+    },
+    {
+      "type": "gmail",
+      "name": "Notify Sales Team",
+      "trigger": "hot leads only"
+    }
+  ],
+  "use_case": "B2B lead generation automation",
+  "author": "developerstartweb-stack"
+}
